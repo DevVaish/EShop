@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 9% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 9% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 9% 12%;
+
+    --primary: 45 100% 51%;
+    --primary-foreground: 220 9% 12%;
+
+    --secondary: 210 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 354 70% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 45 100% 51%;
+
+    --radius: 0.75rem;
+
+    /* boAt brand colors */
+    --boat-yellow: 45 100% 51%;
+    --boat-blue: 210 100% 50%;
+    --boat-dark: 220 9% 12%;
+    --boat-red: 354 70% 54%;
+    --boat-light: 210 40% 96%;
+
+    --hero-gradient-start: 210 80% 65%;
+    --hero-gradient-end: 210 100% 50%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 9% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 9% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 9% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 45 100% 51%;
+    --primary-foreground: 220 9% 12%;
+
+    --secondary: 210 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 9% 15%;
+    --muted-foreground: 220 14% 65%;
+
+    --accent: 354 70% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 9% 20%;
+    --input: 220 9% 20%;
+    --ring: 45 100% 51%;
+
+    --boat-yellow: 45 100% 51%;
+    --boat-blue: 210 100% 50%;
+    --boat-dark: 220 9% 6%;
+    --boat-red: 354 70% 54%;
+    --boat-light: 210 20% 15%;
+
+    --hero-gradient-start: 210 80% 45%;
+    --hero-gradient-end: 210 100% 35%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-snowflake {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  /* Promo Banner */
+  .promo-banner {
+    @apply bg-foreground text-background text-center py-2 text-sm font-medium;
+  }
+
+  .promo-banner a {
+    @apply text-primary underline ml-1 hover:text-primary/80;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply relative text-foreground font-medium transition-colors duration-200 hover:text-secondary;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-secondary transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Category Cards */
+  .category-card {
+    @apply relative overflow-hidden rounded-xl transition-all duration-300 cursor-pointer;
+  }
+
+  .category-card:hover {
+    @apply shadow-2xl -translate-y-2;
+  }
+
+  .category-card img {
+    @apply transition-transform duration-500;
+  }
+
+  .category-card:hover img {
+    @apply scale-110;
+  }
+
+  /* Product Cards */
+  .product-card {
+    @apply relative overflow-hidden rounded-2xl bg-card transition-all duration-300 border border-border;
+  }
+
+  .product-card:hover {
+    @apply shadow-xl border-secondary/30;
+  }
+
+  .product-badge {
+    @apply absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold;
+  }
+
+  .product-badge-bestseller {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .product-badge-new {
+    @apply bg-secondary text-secondary-foreground;
+  }
+
+  .product-rating {
+    @apply flex items-center gap-1 text-sm;
+  }
+
+  .product-rating svg {
+    @apply w-4 h-4 text-primary fill-primary;
+  }
+
+  .product-price-original {
+    @apply line-through text-muted-foreground text-sm;
+  }
+
+  .product-price-sale {
+    @apply text-lg font-bold text-foreground;
+  }
+
+  .product-discount {
+    @apply text-accent text-sm font-semibold;
+  }
+
+  /* Sale Banner */
+  .sale-banner {
+    @apply relative overflow-hidden rounded-3xl;
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%);
+  }
+
+  .sale-banner-dark {
+    background: linear-gradient(135deg, hsl(220 9% 15%) 0%, hsl(220 9% 8%) 100%);
+  }
+
+  /* Features Bar */
+  .feature-item {
+    @apply flex items-center gap-3 px-6 py-4;
+  }
+
+  .feature-icon {
+    @apply w-12 h-12 flex items-center justify-center;
+  }
+
+  /* Blog Cards */
+  .blog-card {
+    @apply bg-card rounded-2xl overflow-hidden transition-all duration-300 border border-border;
+  }
+
+  .blog-card:hover {
+    @apply shadow-xl -translate-y-2 border-secondary/30;
+  }
+
+  /* Buttons */
+  .btn-shop {
+    @apply px-8 py-3 rounded-full font-bold text-foreground bg-primary hover:bg-primary/90 transition-all duration-300;
+  }
+
+  .btn-shop-outline {
+    @apply px-8 py-3 rounded-full font-bold border-2 border-background text-background hover:bg-background hover:text-secondary transition-all duration-300;
+  }
+
+  /* Bank logos bar */
+  .bank-bar {
+    @apply bg-primary py-3 flex items-center justify-center gap-8 overflow-hidden;
+  }
+
+  /* Footer */
+  .footer {
+    @apply bg-foreground text-background;
+  }
+
+  .footer-link {
+    @apply text-background/70 hover:text-background transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .bg-boat-gradient {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: hsl(var(--background) / 0.8);
+  }
+}
+
+/* GSAP Animation Classes */
+.gsap-fade-up {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.gsap-fade-left {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.gsap-fade-right {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.gsap-scale {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Hero Text Styling */
+.hero-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--secondary) / 0.8);
+}
